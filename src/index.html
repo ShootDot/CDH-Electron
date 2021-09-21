@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap">
+</head>
+
+<body>
+    <header class="titlebar">
+        <div class="drag-region">
+            <div class="window-title">
+                <img src="img/icon.png">
+                <span>Chaotic Destiny Desktop</span>
+                <div id="update"></div>
+            </div>
+            <div class="window-controls">
+                <div class="button" id="min-button" onclick="ipcRenderer.send('minimize')">
+                    <i class="icon bx bx-message-square-minus" draggable="false"></i>
+                </div>
+                <div class="button" id="max-button" onclick="ipcRenderer.send('toggleMaximize')">
+                    <i class="icon bx bx-message-square" draggable="false"></i>
+                </div>
+                <div class="button" id="close-button" onclick="ipcRenderer.send('close')">
+                    <i class="icon bx bxs-message-square-x" draggable="false"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="bx bx-compass icon"></i>
+            <div class="logo_name">Menu</div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="javascript:webview.loadURL('https://chaoticdestiny.host')">
+                    <i class="bx bxs-home"></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:webview.loadURL('https://dashboard.chaoticdestiny.host')">
+                    <i class="bx bxs-dashboard"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:webview.loadURL('https://panel.chaoticdestiny.host')">
+                    <i class="bx bx-bot"></i>
+                    <span class="links_name">Panel</span>
+                </a>
+                <span class="tooltip">Panel</span>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:webview.reload()">
+                    <i class="bx bx-refresh"></i>
+                    <span class="links_name">Refresh</span>
+                </a>
+                <span class="tooltip">Refresh</span>
+            </li>
+            <li class="project">
+                <div class="project-details">
+                    <img src="img/icon.png">
+                    <div class="package">
+                        <div class="name">Chaotic Destiny</div>
+                        <div class="version"></div>
+                    </div>
+                </div>
+                <a class="github" href="#">
+                    <i class="bx bxl-github"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <webview src="https://chaoticdestiny.host" allowpopups useragent="Chaotic Destiny Desktop"></webview>
+    </section>
+    <script src="app.js"></script>
+</body>
+
+</html>

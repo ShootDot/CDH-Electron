@@ -1,0 +1,371 @@
+:root {
+    --red: #ed4c78;
+    --green: gold;
+    --dark: rgb(27, 27, 27);
+    --navy: rgba(73, 69, 69, 0.8);
+    --gray: #8b97a2;
+    --blue: rgba(27, 27, 27, 0.644);
+    --yellow: #f5ca99;
+    --round: 0.75rem;
+    --margin: 32px;
+}
+
+ ::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    overflow-y: hidden;
+    background-color: var(--blue);
+    font-family: "Inter ver" sans-serif;
+}
+
+webview {
+    height: calc(100vh - var(--margin));
+    background-color: var(--blue);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.titlebar {
+    top: 0;
+    width: 100%;
+    display: block;
+    position: fixed;
+    height: var(--margin);
+    color: #fff;
+    background-color: var(--dark);
+}
+
+.titlebar .drag-region {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    -webkit-app-region: drag;
+    grid-template-columns: auto 138px;
+}
+
+.button:hover {
+    background-color: var(--blue);
+}
+
+.window-title {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.window-title span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.window-title img {
+    height: 50%;
+    margin-left: 3px;
+    margin-right: 10px;
+}
+
+.window-controls {
+    display: grid;
+    -webkit-app-region: no-drag;
+    grid-template-columns: repeat(3, 36px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+.window-controls .button {
+    user-select: none;
+    cursor: pointer;
+    grid-row: 1 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#min-button {
+    grid-column: 1;
+    color: var(--green);
+}
+
+#max-button {
+    grid-column: 2;
+    color: var(--yellow);
+}
+
+#close-button {
+    grid-column: 3;
+    color: var(--red);
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    height: calc(100% - var(--margin));
+    width: 78px;
+    background: var(--dark);
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar .logo-details {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sidebar .logo-details .icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar .logo-details .logo_name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name {
+    opacity: 1;
+}
+
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details #btn {
+    text-align: right;
+}
+
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.sidebar .nav-list {
+    height: 100%;
+}
+
+.sidebar li {
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
+}
+
+.sidebar li .tooltip {
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 15px);
+    z-index: 3;
+    color: white;
+    background: var(--blue);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 0.6rem;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar input {
+    font-size: 15px;
+    color: #FFF;
+    font-weight: 400;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    width: 50px;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    background: var(--blue);
+}
+
+.sidebar.open input {
+    padding: 0 20px 0 50px;
+    width: 100%;
+}
+
+.sidebar.open li .tooltip {
+    display: none;
+}
+
+.sidebar li.nav-item a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--round);
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: var(--navy);
+}
+
+.sidebar li.nav-item a:hover {
+    background: var(--green);
+}
+
+.sidebar li.nav-item a .links_name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.sidebar.open li.nav-item a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar li.nav-item a:hover .links_name,
+.sidebar li.nav-item a:hover i {
+    transition: all 0.5s ease;
+    color: var(--dark);
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: var(--round);
+}
+
+.sidebar li.project {
+    position: fixed;
+    height: 60px;
+    width: 78px;
+    left: 0;
+    bottom: -8px;
+    padding: 10px 14px;
+    background: var(--navy);
+    transition: all 0.5s ease;
+    overflow: hidden;
+    border-right: solid 2px var(--dark);
+}
+
+.sidebar.open li.project {
+    width: 250px;
+}
+
+.sidebar li .project-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.sidebar li img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.sidebar li.project .name,
+.sidebar li.project .version {
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+    white-space: nowrap;
+}
+
+.sidebar li.project .version {
+    font-size: 12px;
+}
+
+.sidebar .project i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: var(--navy);
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 0px;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .project i {
+    width: 50px;
+    background: none;
+}
+
+.home-section {
+    position: relative;
+    left: 78px;
+    margin-top: var(--margin);
+    height: calc(100% - var(--margin));
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+@media (max-width: 420px) {
+    .sidebar li .tooltip {
+        display: none;
+    }
+}
+
+.green-link {
+    color: var(--green);
+}
+
+.yellow-link {
+    color: var(--yellow);
+}
